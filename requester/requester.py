@@ -16,6 +16,9 @@ class Requester:
             item = json.dumps(item)
         return item
 
+    def get_all(self, id: int) -> list:
+        raise NotImplementedError
+
     def create(self, data: dict) -> dict:
         try:
             self.connection.insert(data)
@@ -35,3 +38,6 @@ class Requester:
             return {"status": "OK"}
         except Exception:
             return {"status": "Error"}
+
+    def delete(self, id: int):
+        raise NotImplementedError

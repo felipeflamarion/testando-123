@@ -39,11 +39,15 @@ def test_get(connection, requester, item):
 
     assert response == item
 
+    connection.select.assert_called_once_with(id=1)
 
-def test_create(requester):
+
+def test_create(connection, requester):
     response = requester.create(data={"name": "Berna", "team": "jarvis"})
 
     assert response.get("status") == "OK"
+
+    connection.insert.assert_called_once_with({"name": "Berna", "team": "jarvis"})
 
 
 def test_create_with_error(connection, requester):
@@ -53,6 +57,16 @@ def test_create_with_error(connection, requester):
 
     assert response.get("status") == "Error"
 
+    connection.insert.assert_called_once_with({"name": "Berna", "team": "jarvis"})
+
 
 def test_get_as_string():
+    pass
+
+
+def test_delete():
+    pass
+
+
+def test_update():
     pass
